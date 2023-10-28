@@ -22,6 +22,18 @@ app.get('/signin', (req, res) => {
     res.render("sign-in");
 });
 
+app.get('/profile', (req, res) => {
+    res.render("profile");
+});
+
+app.get('/dashboard', (req, res) => {
+    res.render("dashboard");
+});
+
+
+app.get('/chat', (req, res) => {
+    res.render("chatroom");
+});
 // Start the server
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
