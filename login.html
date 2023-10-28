@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <!DOCTYPE html>
+    <html lang="en">
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>FOFA Login</title>
+        <style>
+            body {
+                background-color: rgba(255, 255, 255, 0.727);
+                text-align: center;
+            }
+    
+            .container {
+                max-width: 400px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+    
+            h1 {
+                text-align: center;
+            }
+    
+            input[type="text"],
+            input[type="password"] {
+                width: 100%;
+                padding: 10px;
+                margin: 8px 0;
+                box-sizing: border-box;
+            }
+    
+            .login-btn {
+                width: 100%;
+                background-color: rgb(75, 75, 145);
+                color: white;
+                padding: 14px 20px;
+                margin: 8px 0;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                font-weight: bold;
+            }
+    
+            .login-btn:hover {
+                background-color: darkblue;
+            }
+    
+            .forgot-password {
+                color: blue;
+                text-decoration: none;
+            }
+    
+            .signin-link {
+                position: absolute;
+                top: 10px;
+                right: 20px;
+                color: blue;
+                text-decoration: none;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <div class="container">
+            <h1>Welcome to FOFA</h1>
+            <form id="loginForm">
+                <input type="text" id="username" placeholder="Username" required><br>
+                <input type="password" id="password" placeholder="Password" required><br>
+                <button type="button" class="login-btn" onclick="login()">Login</button><br>
+                <a href="#" class="forgot-password">Forgot Password</a>
+            </form>
+        </div>
+        <a href="main.html" class="signin-link">Sign Up</a>
+    
+        <script>
+            function login() {
+                var username = document.getElementById("username").value;
+                var password = document.getElementById("password").value;
+                // Here, you can perform validation or send the data to the server.
+                // For now, let's redirect to main.html
+                window.location.href = "main.html";
+            }
+        </script>
+    </body>
+    
+    </html>
+    
