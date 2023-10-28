@@ -1,11 +1,11 @@
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
-
-// Set EJS as the view engine
+const bodyParser = require('body-parser');
+const users = [];
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
-
-app.set('view engine', 'ejs');
+    app.set('view engine', 'ejs');
 
 // Define a simple route
 app.get('/', (req, res) => {
