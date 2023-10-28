@@ -21,6 +21,12 @@ app.get('/signup', (req, res) => {
 app.get('/signin', (req, res) => {
     res.render("sign-in");
 });
+app.get('/pages/dashboard.html', (req, res) => {
+    res.redirect("/dashboard");
+});
+app.get('/pages/profile.html', (req, res) => {
+    res.redirect("/profile");
+});
 
 app.get('/profile', (req, res) => {
     res.render("profile");
