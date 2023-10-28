@@ -34,7 +34,7 @@
         </nav>
         <ul class="navbar-nav d-none d-lg-flex">
           <li class="nav-item px-3 py-3 border-radius-sm  d-flex align-items-center">
-            <a href="/corporate-ui-dashboard-main/pages/dashboard.html" class="nav-link text-white p-0">
+            <a href="/dashboard" class="nav-link text-white p-0">
               Dashboard
             </a>
           </li>
@@ -168,15 +168,11 @@
             </a>
           </li>
           <li class="nav-item border-radius-sm px-3 py-3 me-2  d-flex align-items-center">
-            <a href="../pages/sign-in.html" class="nav-link text-white p-0">
-              Sign In
+            <a href="/chat" class="nav-link text-white p-0">
+              Chat
             </a>
           </li>
-          <li class="nav-item border-radius-sm px-3 py-3 me-2  d-flex align-items-center">
-            <a href="../pages/sign-up.html" class="nav-link text-white p-0">
-              Sign Up
-            </a>
-          </li>
+          
         </ul>
         <div class="ms-md-auto p-0 d-flex align-items-center w-sm-20">
           <div class="input-group border-dark">
@@ -203,10 +199,10 @@
           <div class="col-auto my-auto">
             <div class="h-100">
               <h3 class="mb-0 font-weight-bold">
-                Noah Mclaren
+                <%= user.name  %>
               </h3>
               <p class="mb-0">
-                noah_mclaren@mail.com
+                <%= user.email  %>
               </p>
             </div>
           </div>
@@ -293,8 +289,8 @@
                 Hi, I’m Alec Thompson, Decisions: If you can’t decide, the answer is no. If two equally difficult paths, choose the one more painful in the short term (pain avoidance is creating an illusion of equality).
               </p>
               <ul class="list-group">
-                <li class="list-group-item border-0 ps-0 text-dark font-weight-semibold pt-0 pb-1 text-sm"><span class="text-secondary">First Name:</span> &nbsp; Noah</li>
-                <li class="list-group-item border-0 ps-0 text-dark font-weight-semibold pb-1 text-sm"><span class="text-secondary">Last Name:</span> &nbsp; Mclaren</li>
+                <li class="list-group-item border-0 ps-0 text-dark font-weight-semibold pt-0 pb-1 text-sm"><span class="text-secondary">First Name:</span> &nbsp; <%= user.name  %></li>
+                <!-- <li class="list-group-item border-0 ps-0 text-dark font-weight-semibold pb-1 text-sm"><span class="text-secondary">Last Name :</span> &nbsp; Mclaren</li> -->
                 <li class="list-group-item border-0 ps-0 text-dark font-weight-semibold pb-1 text-sm"><span class="text-secondary">Mobile:</span> &nbsp; +(44) 123 1234 123</li>
                 <li class="list-group-item border-0 ps-0 text-dark font-weight-semibold pb-1 text-sm"><span class="text-secondary">Function:</span> &nbsp; Manager - Organization</li>
                 <li class="list-group-item border-0 ps-0 text-dark font-weight-semibold pb-1 text-sm"><span class="text-secondary">Location:</span> &nbsp; USA</li>
@@ -320,7 +316,7 @@
               <div class="row mb-sm-0 mb-2">
                 <div class="col-md-8 col-9">
                   <h6 class="mb-0 font-weight-semibold text-lg">Internal chat</h6>
-                  <p class="text-sm mb-0">/marketing channel</p>
+                  <p class="text-sm mb-0">/Psychologists</p>
                 </div>
                 <div class="col-md-4 col-3 text-end">
                   <button type="button" class="btn btn-white btn-icon px-2 py-2">
@@ -471,9 +467,7 @@
                       Don't be afraid to be wrong
                     </h4>
                   </a>
-                  <p class="mb-4">
-                    As Uber works through a huge amount of internal management turmoil.
-                  </p>
+                 
                   <a href="javascript:;" class="text-dark font-weight-semibold icon-move-right mt-auto w-100 mb-5">
                     Read post
                     <i class="fas fa-arrow-right-long text-sm ms-1" aria-hidden="true"></i>

@@ -1,7 +1,7 @@
 <section class="msger">
     <header class="msger-header">
       <div class="msger-header-title">
-        <i class="fas fa-comment-alt"></i> SimpleChat
+        <i class="fas fa-comment-alt"></i> 
       </div>
       <div class="msger-header-options">
         <span><i class="fas fa-cog"></i></span>
@@ -22,33 +22,19 @@
           </div>
   
           <div class="msg-text">
-            Hi, welcome to SimpleChat! Go ahead and send me a message. 😄
+            Hi, welcome to FoFA! I am your friendly.I am happy to be to chat with you 😄
           </div>
         </div>
       </div>
   
-      <div class="msg right-msg">
-        <div
-         class="msg-img"
-         style="background-image: url(https://image.flaticon.com/icons/svg/145/145867.svg)"
-        ></div>
-  
-        <div class="msg-bubble">
-          <div class="msg-info">
-            <div class="msg-info-name">Sajad</div>
-            <div class="msg-info-time">12:46</div>
-          </div>
-  
-          <div class="msg-text">
-            You can change your name in JS section!
-          </div>
-        </div>
-      </div>
+      
     </main>
   
     <form class="msger-inputarea">
       <input type="text" class="msger-input" placeholder="Enter your message...">
       <button type="submit" class="msger-send-btn">Send</button>
+      <button id="startButton">Start Listening</button>
+      <p id="output"></p>
     </form>
   </section>
 
@@ -213,6 +199,11 @@ body {
     const msgerForm = get(".msger-inputarea");
 const msgerInput = get(".msger-input");
 const msgerChat = get(".msger-chat");
+var socket = new WebSocket("ws://10.5.32.116:8765/")
+socket.onopen = function() {
+    socket.send("DEFAULT");
+  };
+  
 
 const BOT_MSGS = [
   "Hi, how are you?",
@@ -226,7 +217,7 @@ const BOT_MSGS = [
 const BOT_IMG = "https://image.flaticon.com/icons/svg/327/327779.svg";
 const PERSON_IMG = "https://image.flaticon.com/icons/svg/145/145867.svg";
 const BOT_NAME = "BOT";
-const PERSON_NAME = "Sajad";
+const PERSON_NAME = "User";
 
 msgerForm.addEventListener("submit", event => {
   event.preventDefault();
@@ -237,7 +228,7 @@ msgerForm.addEventListener("submit", event => {
   appendMessage(PERSON_NAME, PERSON_IMG, "right", msgText);
   msgerInput.value = "";
 
-  botResponse();
+  botResponse(msgText);
 });
 
 function appendMessage(name, img, side, text) {
@@ -261,15 +252,31 @@ function appendMessage(name, img, side, text) {
   msgerChat.scrollTop += 500;
 }
 
-function botResponse() {
+function botResponse(msg) {
+ socket.send(msg)
   const r = random(0, BOT_MSGS.length - 1);
   const msgText = BOT_MSGS[r];
   const delay = msgText.split(" ").length * 100;
 
-  setTimeout(() => {
-    appendMessage(BOT_NAME, BOT_IMG, "left", msgText);
-  }, delay);
+ 
+  return msgText
 }
+
+
+socket.onmessage = function(event) {
+    const response = event.data;
+   
+
+    // Speak the bot's response
+    const utterance = new SpeechSynthesisUtterance(response);
+    const voices = synth.getVoices();
+    const femaleVoice = voices.find(voice => voice.name === 'Google UK English Female');
+    if (femaleVoice) {
+      utterance.voice = femaleVoice;
+    }
+    synth.speak(utterance);
+    setTimeout(()=>{ appendMessage(BOT_NAME, BOT_IMG, "left", response);},500)
+  };
 
 // Utils
 function get(selector, root = document) {
@@ -282,9 +289,38 @@ function formatDate(date) {
 
   return `${h.slice(-2)}:${m.slice(-2)}`;
 }
-
+const synth = window.speechSynthesis;
 function random(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 
-  </script>
+    // Check if the browser supports the Web Speech API
+    if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
+        const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+
+        const startButton = document.getElementById('startButton');
+        const output = document.getElementById('output');
+
+        recognition.onresult = function(event) {
+            const transcript = event.results[0][0].transcript;
+            // output.textContent = transcript;
+            appendMessage(PERSON_NAME, PERSON_IMG, "right", transcript)
+            socket.send(transcript)
+           
+        };
+
+        recognition.onstart = function() {
+            startButton.textContent = "Listening...";
+        };
+
+        recognition.onend = function() {
+            startButton.textContent = "Start Listening";
+        };
+
+        startButton.addEventListener('click', function() {
+            recognition.start();
+        });
+    } else {
+        output.textContent = "Speech recognition is not supported in this browser.";
+    }
+</script>
