@@ -1,3 +1,8 @@
+<% if (user) { %>
+    <span id="hide-elem" style="display: none;"><%= user.name %></span>
+  <% } else { %>
+    <span id="hide-elem" style="display: none;">Guest</span>
+  <% } %>
 <section class="msger">
     <header class="msger-header">
       <div class="msger-header-title">
@@ -17,7 +22,7 @@
   
         <div class="msg-bubble">
           <div class="msg-info">
-            <div class="msg-info-name">BOT</div>
+            <div class="msg-info-name">FoFa Response</div>
             <div class="msg-info-time">12:45</div>
           </div>
   
@@ -199,7 +204,7 @@ body {
     const msgerForm = get(".msger-inputarea");
 const msgerInput = get(".msger-input");
 const msgerChat = get(".msger-chat");
-var socket = new WebSocket("ws://10.5.32.116:8765/")
+var socket = new WebSocket("ws://10.10.97.64:8765/")
 socket.onopen = function() {
     socket.send("DEFAULT");
   };
@@ -216,8 +221,8 @@ const BOT_MSGS = [
 // Icons made by Freepik from www.flaticon.com
 const BOT_IMG = "https://image.flaticon.com/icons/svg/327/327779.svg";
 const PERSON_IMG = "https://image.flaticon.com/icons/svg/145/145867.svg";
-const BOT_NAME = "BOT";
-const PERSON_NAME = "User";
+const BOT_NAME = "FoFa Response";
+const PERSON_NAME = document.getElementById("hide-elem").innerText;
 
 msgerForm.addEventListener("submit", event => {
   event.preventDefault();
